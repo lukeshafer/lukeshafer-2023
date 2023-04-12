@@ -1,4 +1,6 @@
 ---
+import '../global.css'
+const currentYear = new Date().getFullYear()
 ---
 
 <html lang="en">
@@ -7,9 +9,130 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Luke Shafer</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<header>
+			<nav>
+				<a href="/">Home</a>
+			</nav>
+			<section class="hero">
+				<img
+					class="profile-image"
+					src={`/profile-image.png?${Date.now()}`}
+					width="400"
+					height="400"
+					alt="Digital drawing of Luke with paint stroke textures"
+				/>
+				<div class="short-bio">
+					<h2>Hi, I'm <span>Luke!</span></h2>
+					<p>
+						I'm a <strong>systems engineer</strong> in Columbus, Ohio focused on long-lasting,
+						thoughtful design.
+					</p>
+				</div>
+			</section>
+		</header>
+
+		<main>
+			<p>
+				I'm a software engineer, artist, and musician based in Columbus, Ohio. I'm
+				passionate about creating meaningful experiences through technology.
+			</p>
+			<p>When I'm not coding, you can find me drawing, painting, or producing music.</p>
+
+			<h2>Services</h2>
+			<p>As a software engineer, I specialize in:</p>
+			<ul>
+				<li>Full-stack web development</li>
+				<li>Mobile app development</li>
+				<li>Software consulting and support</li>
+			</ul>
+
+			<h2>Portfolio</h2>
+			<p>Here are some of my recent projects:</p>
+			<ul>
+				<li><a href="#">Project 1</a></li>
+				<li><a href="#">Project 2</a></li>
+				<li><a href="#">Project 3</a></li>
+			</ul>
+
+			<h2>Contact Me</h2>
+			<p>Ready to work together? Let's get in touch:</p>
+			<ul>
+				<li>
+					Email: <a href="mailto:hello@lukeshafer.com">hello@lukeshafer.com</a>
+				</li>
+				<li>Phone: [insert phone number]</li>
+			</ul>
+		</main>
+
+		<footer>
+			<p>&copy; <span id="year">{currentYear}</span> Luke Shafer</p>
+		</footer>
 	</body>
 </html>
+
+<style>
+	header {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto 1fr;
+	}
+
+	nav {
+		/*position: fixed;*/
+	}
+
+	.profile-image {
+		background-image: url('/profile-paint-stroke-bg.png');
+		background-size: cover;
+	}
+
+	.hero {
+		grid-row: 1;
+		padding: 2rem 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2rem 5rem;
+		flex-wrap: wrap;
+		font-family: var(--font-serif);
+	}
+
+	.hero h2 {
+		font-weight: 400;
+		font-size: 3rem;
+		color: var(--neutral-800);
+	}
+
+	.hero h2 span {
+		font-weight: 700;
+		display: inline-block;
+		color: var(--neutral-900);
+	}
+
+	.short-bio {
+		max-width: 30rem;
+		display: flex;
+		flex-direction: column;
+		font-size: 1.25rem;
+	}
+
+	.short-bio strong {
+		font-weight: 700;
+		color: var(--primary-800);
+	}
+</style>
+
+<script>
+	const year = new Date().getFullYear()
+	document.getElementById('year').textContent = String(year)
+
+	const profileImage = document.querySelector('.profile-image') as HTMLImageElement
+	document.addEventListener('load', () => {
+		// set background image to /profile-paint-stroke-bg.png
+		profileImage.style.backgroundImage = `url('/profile-paint-stroke-bg.png?${Date.now()}')`
+		profileImage.src = profileImage.src + '?' + Date.now()
+	})
+</script>
